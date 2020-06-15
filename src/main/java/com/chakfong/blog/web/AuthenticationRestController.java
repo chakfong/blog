@@ -57,7 +57,7 @@ public class AuthenticationRestController {
     }
 
     @PostMapping("/authenticate")
-    public Result<JWTToken> authorize(@Valid @RequestBody LoginDto loginDto, HttpServletRequest request, HttpServletResponse response) {
+    public Result<JWTToken> authorize(@RequestBody LoginDto loginDto, HttpServletRequest request, HttpServletResponse response) {
         RequestIPHolder.setContext(RequestUtils.getClientIP(request));
         if (authenticationService.isOverLogin()) {
             notNull(loginDto.getCode(), "验证码不能为空");

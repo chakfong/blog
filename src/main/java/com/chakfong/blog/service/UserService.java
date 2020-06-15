@@ -107,7 +107,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         user.setEmail(registerDto.getEmail());
         user.setStatus(UserStatus.ACTIVE.getValue());
-
+        user.setAvatar("47.107.149.16:8700/upload/1592194163640.jpg");
         Set<Authority> authoritySet = new HashSet<>();
         authoritySet.add(Authority.ROLE_USER);
         user.setAuthorities(authoritySet);

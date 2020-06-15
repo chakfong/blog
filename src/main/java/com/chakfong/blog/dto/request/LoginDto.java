@@ -16,6 +16,5 @@ public class LoginDto {
    @Size(min = 4, max = 100)
    private String password;
 
-   @Size(min = 4, max = 4)
    private String code;
 }
