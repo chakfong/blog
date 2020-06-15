@@ -47,6 +47,7 @@ public class Dynamic extends BaseEntity {
 
     @OneToMany(mappedBy = "dynamic", fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = {"dynamic"})
+    @JsonIgnore
     private List<DynamicComment> commentList;
 
     public DynamicDto toDynamicDto() {

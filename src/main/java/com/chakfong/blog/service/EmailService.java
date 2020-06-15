@@ -29,7 +29,11 @@ public class EmailService {
             synchronized (EmailService.class) {
                 if (singletonSession == null) {
                     Properties p = new Properties();
+
+                    p.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+                    p.setProperty("mail.smtp.socketFactory.port", "465");
                     p.setProperty("mail.transport.protocol", emailProperties.getProtocol());
+
                     p.setProperty("mail.smtp.auth", emailProperties.getAuth());
                     p.setProperty("mail.smtp.host", emailProperties.getHost());
                     p.setProperty("mail.smtp.port", emailProperties.getPort());

@@ -6,6 +6,7 @@ import com.chakfong.blog.dto.request.SingleParamDto;
 import com.chakfong.blog.dto.response.CaptchaDto;
 import com.chakfong.blog.dto.response.Result;
 import com.chakfong.blog.dto.response.ResultBuilder;
+import com.chakfong.blog.dto.response.UserDto;
 import com.chakfong.blog.entity.User;
 import com.chakfong.blog.security.RequestIPHolder;
 import com.chakfong.blog.security.filter.JWTFilter;
@@ -72,7 +73,7 @@ public class AuthenticationRestController {
         String jwt = tokenProvider.createToken(authentication, false);
 
         response.setHeader(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-        return ResultBuilder.onSuc(new JWTToken(jwt));
+        return ResultBuilder.onSuc(new JWTToken(userService.getUserWithAuthorities().toDto(), jwt));
     }
 
     @PostMapping("/register")
@@ -91,7 +92,7 @@ public class AuthenticationRestController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/sudo/register")
-    public Result<Boolean> sudoRegister(@RequestParam Integer createCount){
+    public Result<Boolean> sudoRegister(@RequestParam Integer createCount) {
         userService.sudoRegister(createCount);
         return ResultBuilder.onSuc(true);
     }
@@ -123,9 +124,26 @@ public class AuthenticationRestController {
      */
     public static class JWTToken {
 
+
+        private UserDto user;
+
+        @JsonProperty("user")
+        public UserDto getUser() {
+            return user;
+        }
+
+        public void setUser(UserDto user) {
+            this.user = user;
+        }
+
         private String idToken;
 
         JWTToken(String idToken) {
+            this.idToken = idToken;
+        }
+
+        public JWTToken(UserDto user, String idToken) {
+            this.user = user;
             this.idToken = idToken;
         }
 
