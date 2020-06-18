@@ -3,7 +3,6 @@ package com.chakfong.blog.exception;
 import com.chakfong.blog.dto.response.Result;
 import com.chakfong.blog.dto.response.ResultBuilder;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.remote.ResponseEntry;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +17,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +25,7 @@ import java.util.Map;
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {ServiceException.class})
-    public final ResponseEntity<Result> handleServiceException(ServiceException ex, HttpServletRequest request) {
+    public final ResponseEntity<Result<?>> handleServiceException(ServiceException ex, HttpServletRequest request) {
 
         logError(ex, request);
 
@@ -37,17 +35,17 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {AuthenticationException.class})
-    public final ResponseEntity<Result> handleAuthenticationException(AuthenticationException ex, HttpServletRequest request) {
+    public final ResponseEntity<Result<?>> handleAuthenticationException(AuthenticationException ex, HttpServletRequest request) {
         return handleSecurityAuthentication(ex, request);
     }
 
 
     @ExceptionHandler(value = {AccessDeniedException.class})
-    public final ResponseEntity<Result> handleAccessDeniedException(AccessDeniedException ex, HttpServletRequest request) {
+    public final ResponseEntity<Result<?>> handleAccessDeniedException(AccessDeniedException ex, HttpServletRequest request) {
         return handleSecurityAuthentication(ex, request);
     }
 
-    private ResponseEntity<Result> handleSecurityAuthentication(Exception ex, HttpServletRequest request) {
+    private ResponseEntity<Result<?>> handleSecurityAuthentication(Exception ex, HttpServletRequest request) {
         logError(ex, request);
 
         HttpHeaders headers = buildUTF8Headers();
@@ -58,7 +56,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * 处理 {@link CheckException}
      */
     @ExceptionHandler(value = {CheckException.class})
-    public final ResponseEntity<Result> handleCheckException(CheckException ex, HttpServletRequest request) {
+    public final ResponseEntity<Result<?>> handleCheckException(CheckException ex, HttpServletRequest request) {
         // 注入servletRequest，用于出错时打印请求URL与来源地址
         logError(ex, request);
 
@@ -69,7 +67,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = {Exception.class})
-    public final ResponseEntity<Result> handleException(Exception ex, HttpServletRequest request) {
+    public final ResponseEntity<Result<?>> handleException(Exception ex, HttpServletRequest request) {
         // 注入servletRequest，用于出错时打印请求URL与来源地址
         logError(ex, request);
         log.error("catch Exception", ex);
@@ -100,7 +98,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         Map<String, String> map = new HashMap<>();
         map.put("message", ex.getMessage());
 
-//        logger.error(map.toString(), ex);
         log.error(map.toString());
 
     }

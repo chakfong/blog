@@ -52,7 +52,7 @@ public class UserService {
 
     private final SftpService sftpService;
 
-    public UserService(UserRepository userRepository, UserFriendRepository userFriendRepository, UserFriendApplicationRepository userFriendApplicationRepository, RedissonClient redissonClient, CaptchaService captchaService, PasswordEncoder passwordEncoder, EmailService emailService, SftpService sftpService, ImageServerProperties imageServerProperties) {
+    public UserService(UserRepository userRepository, UserFriendRepository userFriendRepository, UserFriendApplicationRepository userFriendApplicationRepository, RedissonClient redissonClient, CaptchaService captchaService, PasswordEncoder passwordEncoder, EmailService emailService, SftpService sftpService) {
         this.userRepository = userRepository;
         this.userFriendRepository = userFriendRepository;
         this.userFriendApplicationRepository = userFriendApplicationRepository;

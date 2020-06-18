@@ -32,7 +32,6 @@ public class SftpService {
         ChannelSftp sftp = null;
         try {
             sftp = this.createSftp();
-//            sftp.cd(config.getRoot());
             sftp.rm('.' + targetPath);
             return true;
         } catch (Exception e) {
@@ -127,8 +126,6 @@ public class SftpService {
         // targetPath = "upload/xxx/xxx.jpg"
         ChannelSftp sftp = this.createSftp();
         try {
-//            sftp.cd(config.getRoot());
-//            log.info("Change path to {}", config.getRoot());
 
             int index = targetPath.lastIndexOf('/');
             String fileDir = targetPath.substring(0, index);
@@ -190,8 +187,8 @@ public class SftpService {
         return getSocket() + filePath;
     }
 
-    public String getImagePath(String URI) {
-        return URI.substring(getSocket().length());
+    public String getImagePath(String uri) {
+        return uri.substring(getSocket().length());
     }
 
     public String getAvatarPath() {

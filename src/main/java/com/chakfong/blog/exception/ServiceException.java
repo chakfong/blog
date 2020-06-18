@@ -2,7 +2,7 @@ package com.chakfong.blog.exception;
 
 public class ServiceException extends RuntimeException {
 
-    private ErrorCode code;
+    private final ErrorCode code;
 
 
     public ServiceException(String message, ErrorCode code) {

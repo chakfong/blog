@@ -2,6 +2,8 @@ package com.chakfong.blog.utils;
 
 public class RedisKeys {
 
+    private RedisKeys(){}
+
     public static final String FAIL_LOGIN_COUNT_KEY = "FAIL_LOGIN_COUNT";
 
     public static final String LOGIN_CAPTCHA_KEY = "CAPTCHA";

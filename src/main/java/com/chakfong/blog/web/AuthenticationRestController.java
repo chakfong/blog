@@ -12,9 +12,6 @@ import com.chakfong.blog.security.RequestIPHolder;
 import com.chakfong.blog.security.filter.JWTFilter;
 import com.chakfong.blog.security.filter.TokenProvider;
 import com.chakfong.blog.service.AuthenticationService;
-
-import static com.chakfong.blog.utils.CheckUtils.notNull;
-
 import com.chakfong.blog.service.UserService;
 import com.chakfong.blog.utils.RequestUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -26,12 +23,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+
+import static com.chakfong.blog.utils.CheckUtils.notNull;
 
 /**
  * Controller to authenticate users.
@@ -98,7 +95,7 @@ public class AuthenticationRestController {
     }
 
     @PostMapping("/register/email/send")
-    public Result sendEmailCaptcha(@RequestBody SingleParamDto<String> email) {
+    public Result<String> sendEmailCaptcha(@RequestBody SingleParamDto<String> email) {
         userService.sendEmailCaptcha(email.get());
         return ResultBuilder.onSuc();
     }

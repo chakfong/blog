@@ -3,7 +3,6 @@ package com.chakfong.blog.security;
 import com.chakfong.blog.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RAtomicLong;
-import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.chakfong.blog.utils.RedisKeys.*;
+import static com.chakfong.blog.utils.RedisKeys.FAIL_LOGIN_COUNT_KEY;
 
 @Component
 @Slf4j
@@ -31,7 +30,4 @@ public class AuthenticationFailureBadCredentialsEventListener implements Applica
         log.info("IP："+ip+" 失败次数为" + count );
     }
 
-    private void dd(){
-
-    }
 }

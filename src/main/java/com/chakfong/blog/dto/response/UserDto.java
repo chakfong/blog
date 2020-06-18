@@ -4,9 +4,10 @@ import com.chakfong.blog.entity.Authority;
 import com.chakfong.blog.entity.BaseUser;
 import com.chakfong.blog.entity.User;
 import lombok.Data;
-import org.hibernate.collection.internal.PersistentSet;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 @Data
 public class UserDto implements BaseUser {

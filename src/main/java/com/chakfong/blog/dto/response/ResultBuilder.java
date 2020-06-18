@@ -4,6 +4,8 @@ import com.chakfong.blog.exception.ErrorCode;
 
 public class ResultBuilder {
 
+
+
     public static <T> Result<T> onError(int code, String message) {
         Result<T> result = new Result<>();
         result.setCode(code);

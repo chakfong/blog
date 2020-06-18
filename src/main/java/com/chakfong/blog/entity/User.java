@@ -2,17 +2,15 @@ package com.chakfong.blog.entity;
 
 import com.chakfong.blog.dto.response.UserDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Data
@@ -83,12 +81,12 @@ public class User extends BaseEntity implements Cloneable, BaseUser {
     @JsonIgnore
     private List<User> whitelist;
 
-    @OneToMany(mappedBy = "user",fetch =   FetchType.LAZY) // 多端的实体类字段名
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY) // 多端的实体类字段名
     @JsonIgnore
     private List<Dynamic> dynamics;
 
 
-    @OneToMany(mappedBy = "user",fetch =   FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<DynamicComment> dynamicsComment;
 
@@ -120,7 +118,7 @@ public class User extends BaseEntity implements Cloneable, BaseUser {
         return new UserDto(userId, username, email, avatar, status, authorities, blacklist, whitelist);
     }
 
-    public User toUser(){
+    public User toUser() {
         return this;
     }
 }

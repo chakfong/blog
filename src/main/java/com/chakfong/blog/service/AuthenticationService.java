@@ -33,7 +33,7 @@ public class AuthenticationService {
         String key = RedisUtils.keySplice(FAIL_LOGIN_COUNT_KEY, ip);
         RAtomicLong failLoginCountBucket = redissonClient.getAtomicLong(key);
         Long count = failLoginCountBucket.get();
-        if (count != null && count >= 5)
+        if (count >= 5)
             return true;
         return false;
     }

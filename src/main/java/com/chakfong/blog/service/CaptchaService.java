@@ -64,7 +64,7 @@ public class CaptchaService {
     }
 
     private Color getRandColor(int fc, int bc) {
-        Random random = new Random();
+
         if (fc > 255) {
             fc = 255;
         }

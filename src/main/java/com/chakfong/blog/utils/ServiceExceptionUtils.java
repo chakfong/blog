@@ -9,6 +9,10 @@ import java.util.Objects;
 
 public class ServiceExceptionUtils {
 
+    private ServiceExceptionUtils(){
+        throw new IllegalStateException("不能实例化");
+    }
+
     public static void throwIf(boolean condition, ErrorCode errorCode, String message) {
         if (condition)
             throw new ServiceException(message, errorCode);

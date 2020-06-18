@@ -2,14 +2,8 @@ package com.chakfong.blog.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.annotations.BatchSize;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Data

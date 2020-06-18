@@ -4,7 +4,7 @@ import org.springframework.util.Assert;
 
 public class RequestIPHolder {
 
-    private static final ThreadLocal<String> contextHolder = new ThreadLocal();
+    private static final ThreadLocal<String> contextHolder = new ThreadLocal<>();
 
     public void clearContext() {
         contextHolder.remove();
